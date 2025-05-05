@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Windows 11 Blue Screen</title>
+    <style>
+        * {
+            user-select: none;
+            font-family: Segoe UI, 微软雅黑, sans-serif;
+            color: #fff;
+            cursor: none;
+        }
+        body {
+            background-color: #003d92;
+            margin: 0;
+        }
+        .emc {
+            display: flex;
+            font-size: 131px;
+            margin-left: 100px;
+            margin-top: 30px;
+        }
+        .tc {
+            margin-left: 100px;
+            font-size: 21px;
+        }
+        .text2 {
+            margin-top: -15px;
+        }
+        .text3-timer-container {
+            display: flex;
+        }
+        .lower {
+            margin-left: 100px;
+            display: flex;
+        }
+        .l-tc1 {
+            display: block;
+        }
+        .l-image {
+            width: 100px;
+            height: 100px;
+            margin-top: 15px;
+        }
+        .l-tc-text1 {
+            margin-left: 15px;
+            margin-top: 8px;
+        }
+        .l-tc-text2,.l-tc-text3 {
+            margin-left: 15px;
+        }
+        .l-tc-text3 {
+            margin-top: -10px;
+        }
+    </style>
+    <script>
+        document.addEventListener('contextmenu', function(event) {
+            event.preventDefault();
+        });
+    </script>
+    <script>
+            let count = 0;
+            let intervalId;
+            const maxCount = 100;
+
+            function updateCount() {
+                document.getElementById('timer').innerText = count;
+            }
+
+            function getRandomDelay() {
+                return Math.random() * 3000 + 500;
+            }
+
+            function startTimer() {
+                if (count >= maxCount) {
+                    stopTimer();
+                    return;
+                }
+    
+                count++;
+                updateCount();
+                intervalId = setTimeout(startTimer, getRandomDelay());
+            }
+
+            function stopTimer() {
+                clearTimeout(intervalId);
+            }
+
+            window.onload = () => {
+                startTimer();
+            };
+    </script>
+</head>
+<body>
+    <div class="emc">
+        <div class="eyes">:</div>
+        <div class="mouth">(</div>
+    </div>
+    <div class="tc">
+        <p class="text1">你的设备遇到问题，需要重启。</p>
+        <p class="text2">我们只收集某些错误信息，然后为你重新启动。</p>
+        <div class="text3-timer-container"><p class="text3"><div class="timer" id="timer">0</div>%&nbsp;完成</p></div>
+    </div>
+    <div class="lower">
+        <img src="./File/QRimage.png" alt="" class="l-image">
+        <div class="l-tc">
+            <p class="l-tc-text1">有关此问题的详情信息和可能解决的方法，请访问&nbsp;https://www.windows.com/stopcode</p>
+            <p class="l-tc-text2">如果致电支持人员，请向他们提供以下信息:</p>
+            <p class="l-tc-text3">终止代码:&nbsp;CRITICAL_PROCESS_DIED</p>
+        </div>
+    </div>
+</body>
+</html>
